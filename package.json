@@ -1,0 +1,31 @@
+{
+  "name": "flowmap",
+  "version": "1.0.0",
+  "description": "a new platform for team&task managment",
+  "homepage": "https://github.com/sabonn/FlowMap#readme",
+  "bugs": {
+    "url": "https://github.com/sabonn/FlowMap/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sabonn/FlowMap.git"
+  },
+  "license": "ISC",
+  "author": "sabonn",
+  "type": "commonjs",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node src/dev.js"
+  },
+  "dependencies": {
+    "child": "^0.0.3",
+    "child_process": "^1.0.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "joi": "^18.0.2",
+    "pg": "^8.16.3",
+    "pool": "^0.4.1",
+    "process": "^0.11.10"
+  }
+}
