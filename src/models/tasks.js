@@ -1,11 +1,22 @@
 const db = require("../config/db");
+const joi = require("joi");
 
 class task {
   // queries
   static getAllTasksQuery = "SELECT * FROM tasks";
   static getTaskByIdQuery = "SELECT * FROM tasks WHERE id = $1";
   static createTaskQuery =
-    "INSERT INTO task (id,name,creator_id,members) VALUES ($1,$2,$3,$4) RETURNING *";
+    "INSERT INTO task (name,creator_id,members) VALUES ($1,$2,$3) RETURNING *";
+
+  // task schema
+  static getTaskByIdSchema = joi.object({
+    id: joi.number().integer().min(1).required(),
+  });
+  static createTaskSchema = joi.object({
+    name: joi.string().min(1).max(200).required(),
+    creator_id: joi.number().integer().min(1).required(),
+    members: joi.array().items(joi.number().integer().min(1)),
+  });
 
   // table logic
   static async initTable() {

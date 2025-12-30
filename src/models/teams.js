@@ -1,3 +1,4 @@
+const joi = require("joi");
 const db = require("../config/db");
 
 class team {
@@ -5,7 +6,18 @@ class team {
   static getAllTeamsQuery = "SELECT * FROM teams";
   static getTeamByIdQuery = "SELECT * FROM teams WHERE id = $1";
   static createTeamQuery =
-    "INSERT INTO teams (id,name,manager,members) VALUES ($1,$2,$3,$4) RETURNING *";
+    "INSERT INTO teams (name,manager,members) VALUES ($1,$2,$3) RETURNING *";
+
+  // team schema
+  static getTeamByIdSchema = joi.object({
+    id: joi.number().integer().min(1).required(),
+  });
+
+  static createTeamSchema = joi.object({
+    name: joi.string().min(1).max(200).required(),
+    manager: joi.number().integer().min(1).required(),
+    members: joi.array().items(joi.number().integer().min(1)).min(1),
+  });
 
   // table logic
   static async initTable() {
